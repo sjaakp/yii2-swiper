@@ -10,6 +10,7 @@
 namespace sjaakp\swiper;
 
 use yii\base\Behavior;
+use yii\base\InvalidConfigException;
 
 /**
  * Class PrevNextBehavior
@@ -28,6 +29,18 @@ class PrevNextBehavior extends Behavior
      * @var int SORT_ASC | SORT_DESC sort direction
      */
     public $sort = SORT_ASC;
+
+    /**
+     * @inheritDoc
+     * @throws InvalidConfigException
+     */
+    public function init()
+    {
+        parent::init();
+        if (is_null($this->attribute))   {
+            throw new InvalidConfigException('PrevNextBehavior: property "attribute" is not set.');
+        }
+    }
 
     /**
      * @return \yii\db\ActiveRecord|null previous record

@@ -13,6 +13,7 @@ use yii\base\Widget;
 use yii\base\InvalidConfigException;
 use yii\db\BaseActiveRecord;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * Class Swiper
@@ -80,6 +81,11 @@ class Swiper extends Widget
     public $options = [];
 
     /**
+     * @var bool whether to register link tags for previous and next
+     */
+    public $registerLinkTags = false;
+
+    /**
      * @inheritDoc
      * @throws  InvalidConfigException
      */
@@ -115,12 +121,12 @@ var $id= new Hammer(document.$elmt,{recognizers:[[Hammer.Swipe,{direction: Hamme
 $id.on('swipeleft swiperight',function(ev){swipe(ev.type);});", $view::POS_READY, 'sjaakp\swiper');
 
         Html::addCssClass($this->options, 'swiper');
-        $buttons = [ $this->renderButton($this->previous, $this->id . '-swiperight') ];
+        $buttons = [ $this->renderButton($this->previous, $this->id . '-swiperight', 'prev') ];
         if (! is_null($this->indexUrl)) {
             Html::addCssClass($this->options, 'swiper-3');
             $buttons[] = Html::a(Html::tag('span', $this->indexLabel), $this->indexUrl);
         }
-        $buttons[] = $this->renderButton($this->next, $this->id . '-swipeleft');
+        $buttons[] = $this->renderButton($this->next, $this->id . '-swipeleft', 'next');
         return Html::tag('nav', implode("\n", $buttons), $this->options);
     }
 
@@ -128,12 +134,17 @@ $id.on('swipeleft swiperight',function(ev){swipe(ev.type);});", $view::POS_READY
      * @param $model BaseActiveRecord
      * @return string
      */
-    protected function renderButton($model, $id)
+    protected function renderButton($model, $id, $rel)
     {
-        if (! $model) return '<div></div>';
+        if (! $model) return '<div class="swiper-empty"></div>';
+
         $url = [$this->url];
         $pkName = $model->primaryKey()[0];
         $url[$pkName] = $model->primaryKey;
+        if ($this->registerLinkTags)    {
+            $this->getView()->registerLinkTag([ 'rel' => $rel, 'href' => Url::to($url) ]);
+        }
+
         $url['#'] = $this->id;
         $title = $model->{$this->labelAttribute};
         $text = $this->shortLabelAttribute

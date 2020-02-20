@@ -6,13 +6,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  a,
+  .swiper-empty {
+    max-width: 45%;
+  }
   a {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 45%;
     &:before {
       font-family: FontAwesome, 'Font Awesome 5 Pro';
       font-style: normal;
@@ -41,7 +44,8 @@
     }
   }
   &.swiper-3 {
-    a {
+    a,
+    .swiper-empty {
       max-width: 30%;
     }
   }

@@ -1,0 +1,65 @@
+
+
+.swiper {
+  $ah: 1.8rem;
+  $icon-margin: .35rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 45%;
+    &:before {
+      font-family: FontAwesome, 'Font Awesome 5 Pro';
+      font-style: normal;
+      font-weight: 900;
+      content: '\f139';
+    }
+    > span {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &:first-child {
+      flex-direction: row;
+      &:before {
+        transform: rotate(270deg) scaleX(-1);
+        margin-right: $icon-margin;
+      }
+    }
+    &:last-child {
+      flex-direction: row-reverse;
+      &:before {
+        transform: rotate(90deg);
+        margin-left: $icon-margin;
+      }
+    }
+  }
+  &.swiper-3 {
+    a {
+      max-width: 30%;
+    }
+  }
+  a {
+    padding: .25rem .5rem;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+    background-color: #ecf0f1;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .1);
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      box-shadow:  0 0 12px rgba(0, 0, 0, .2);
+      text-decoration: none;
+    }
+    &:first-child,
+    &:last-child {
+      height: $ah;
+    }
+  }
+}

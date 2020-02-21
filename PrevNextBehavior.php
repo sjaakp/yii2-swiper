@@ -43,14 +43,14 @@ class PrevNextBehavior extends Behavior
     }
 
     /**
-     * @return \yii\db\ActiveRecord|null previous record
+     * @return \yii\db\ActiveQuery previous record
      */
     public function getPrev()   {
         return $this->pnQuery($this->sort ^ self::SORT_DIFF);
     }
 
     /**
-     * @return \yii\db\ActiveRecord|null next record
+     * @return \yii\db\ActiveQuery next record
      */
     public function getNext()   {
         return $this->pnQuery($this->sort);
@@ -63,8 +63,8 @@ class PrevNextBehavior extends Behavior
         $pkName = $owner->primaryKey()[0];
         $operator = $sort == SORT_DESC ? '<' : '>';
         $attrVal = $owner->getAttribute($this->attribute);
-        return $owner->find()->where([$operator, $this->attribute, $attrVal])
+        return $owner->find()->andWhere([$operator, $this->attribute, $attrVal])
             ->orWhere([ 'and', [ $this->attribute => $attrVal ], [ $operator, $pkName, $owner->primaryKey ] ])
-            ->orderBy([$this->attribute => $sort, $pkName => $sort])->limit(1)->one();
+            ->orderBy([$this->attribute => $sort, $pkName => $sort])->limit(1);
     }
 }

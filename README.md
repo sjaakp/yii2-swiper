@@ -40,9 +40,15 @@ in namespace `sjaakp\swiper`.
 
 This is a [`Behavior`](https://www.yiiframework.com/doc/api/2.0/yii-base-behavior)
 for an [`ActiveRecord`](https://www.yiiframework.com/doc/api/2.0/yii-db-activerecord). 
-It supplies the owning `ActiveRecord` with two virtual attributes:
-- `prev` the previous record, or `null` if the current record is the first.
-- `next` the next record, or `null` if the current record is the last.
+It supplies the owning `ActiveRecord` with two methods:
+- **getPrev()**: Returns an [`ActiveQuery`](https://www.yiiframework.com/doc/api/2.0/yii-db-activequery)
+to the previous record.
+- **getNext()**: Returns an `ActiveQuery`
+to the next record.
+
+In other words, the owning `ActiveRecord` now has two virtual properties:
+- **$prev**: the previous record, or `null` if the current record is the first.
+- **$next**: the next record, or `null` if the current record is the last.
 
 **PrevNextBehavior** has two properties:
 - **$attribute** `string` Name of the `ActiveRecord` attribute that 

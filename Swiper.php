@@ -54,6 +54,12 @@ class Swiper extends Widget
     public $shortLabelAttribute;
 
     /**
+     * @var string | null name of attribute delivering short label
+     * Optional; if null, $labelAttribute is used.
+     */
+    public $titleAttribute;
+
+    /**
      * @var string Bootstrap breakpoint below which short label is used
      */
     public $breakpoint = 'sm';
@@ -146,12 +152,13 @@ $id.on('swipeleft swiperight',function(ev){swipe(ev.type);});", $view::POS_READY
         }
 
         $url['#'] = $this->id;
-        $title = $model->{$this->labelAttribute};
+        $titleAttribute = $this->titleAttribute ?? $this->labelAttribute;
+        $long = $model->{$this->labelAttribute};
         $text = $this->shortLabelAttribute
             ? (Html::tag('span', $model->{$this->shortLabelAttribute}, [ 'class' => "d-inline-block d-$this->breakpoint-none" ])
-                . Html::tag('span', $title, [ 'class' => "d-none d-$this->breakpoint-inline-block" ]))
-            : Html::tag('span', $title);
+                . Html::tag('span', $long, [ 'class' => "d-none d-$this->breakpoint-inline-block" ]))
+            : Html::tag('span', $long);
 
-        return Html::a($text, $url, [ 'id' => $id, 'title' => $title ]);
+        return Html::a($text, $url, [ 'id' => $id, 'title' => $model->{$titleAttribute} ]);
     }
 }

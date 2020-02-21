@@ -91,6 +91,9 @@ buttons. Must be set.
 - **$shortLabelAttribute** `null|string` Name of the attribute providing the 
 short label text for the buttons. Optional. The short label appears when the screen
 width is smaller than the value indicated by **$breakpoint**. Default: `null` (no short labels).
+- **$titleAttribute** `null|string` Name of the attribute providing the 
+popup title text for the buttons. Optional. If `null` (default) the title text will
+be the same as the label text.
 - **$breakpoint** `string` The [Bootstrap 4 breakpoint](https://getbootstrap.com/docs/4.4/layout/overview/#responsive-breakpoints)
 defining when short labels will appear. Default: `'sm'`.
 - **$url** `string` The base URL of the button links. Default: `'view'`.

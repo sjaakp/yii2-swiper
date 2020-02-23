@@ -51,8 +51,12 @@ In other words, the owning `ActiveRecord` now has two virtual properties:
 - **$next**: the next record, or `null` if the current record is the last.
 
 **PrevNextBehavior** has two properties:
-- **$attribute** `string` Name of the `ActiveRecord` attribute that 
-defines the ordering. Has to be set.
+- **$attribute** `string|array` Has to be set.
+    - If `string`: Name of the `ActiveRecord` attribute that 
+    defines the ordering. 
+    - If `[ '<attributeName>' => function($model) ]`: Function returning value
+    of attribute.
+
 - **$sort** `SORT_ASC|SORT_DESC` Sets whether the order is incrementing
 or decrementing. Default: `SORT_ASC` (incrementing).
 

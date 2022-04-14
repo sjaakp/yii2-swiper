@@ -11,9 +11,7 @@ in the [Yii 2.0](https://yiiframework.com/ "Yii") PHP Framework. It allows the u
 to jump to neighbouring records by means of clicking, touch swiping, or using 
 the left and right arrow keys.
 
-**Yii2-swiper** assumes that your site is using a [Font Awesome](https://fontawesome.com/) 
-icon font (v3 or higher).
-[Bootstrap 4](https://getbootstrap.com/) is recommended.
+[Bootstrap 4](https://getbootstrap.com/) is recommended in your site.
 
 A demonstration of **yii2-swiper** is [here](https://sjaakpriester.nl/software/swiper).
 
